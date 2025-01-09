@@ -41,7 +41,7 @@ Common Commands
 Stop containers:
    ```bash
 	docker-compose down
- 	```
+	```
 
 Access the application container:
  
