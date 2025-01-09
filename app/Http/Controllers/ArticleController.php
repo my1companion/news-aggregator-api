@@ -6,9 +6,86 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
+/**
+ * @OA\Schema(
+ *     schema="Article",
+ *     type="object",
+ *     title="Article",
+ *     description="Schema for an article object",
+ *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="title", type="string", example="Breaking News"),
+ *     @OA\Property(property="content", type="string", example="Details about the breaking news..."),
+ *     @OA\Property(property="category", type="string", example="news"),
+ *     @OA\Property(property="source", type="string", example="BBC"),
+ *     @OA\Property(property="published_at", type="string", format="date-time", example="2023-01-01T10:00:00Z")
+ * )
+ */
 
 class ArticleController extends Controller
 {
+    
+    /**
+     * @OA\Get(
+     *     path="/api/articles",
+     *     summary="Get a list of articles",
+     *     tags={"Articles"},
+     *     @OA\Parameter(
+     *         name="keyword",
+     *         in="query",
+     *         description="Search articles by keyword (title or content)",
+     *         required=false,
+     *         @OA\Schema(type="string", example="technology")
+     *     ),
+     *     @OA\Parameter(
+     *         name="published_at",
+     *         in="query",
+     *         description="Filter articles by publication date (YYYY-MM-DD)",
+     *         required=false,
+     *         @OA\Schema(type="string", format="date", example="2023-01-01")
+     *     ),
+     *     @OA\Parameter(
+     *         name="category",
+     *         in="query",
+     *         description="Filter articles by category",
+     *         required=false,
+     *         @OA\Schema(type="string", example="news")
+     *     ),
+     *     @OA\Parameter(
+     *         name="source",
+     *         in="query",
+     *         description="Filter articles by source",
+     *         required=false,
+     *         @OA\Schema(type="string", example="BBC")
+     *     ),
+     *     @OA\Parameter(
+     *         name="per_page",
+     *         in="query",
+     *         description="Number of articles per page",
+     *         required=false,
+     *         @OA\Schema(type="integer", example=10)
+     *     ),
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="A paginated list of articles",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="data", type="array",
+     *                 @OA\Items(ref="#/components/schemas/Article")
+     *             ),
+     *             @OA\Property(property="current_page", type="integer", example=1),
+     *             @OA\Property(property="last_page", type="integer", example=5),
+     *             @OA\Property(property="total", type="integer", example=50)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Validation errors",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="errors", type="object")
+     *         )
+     *     )
+     * )
+     */
     public function index(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -60,6 +137,33 @@ class ArticleController extends Controller
     }
 
 
+    /**
+     * @OA\Get(
+     *     path="/api/articles/{id}",
+     *     summary="Get a specific article by ID",
+     *     tags={"Articles"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the article to retrieve",
+     *         required=true,
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Details of the requested article",
+     *         @OA\JsonContent(ref="#/components/schemas/Article")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Article not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Article not found.")
+     *         )
+     *     )
+     * )
+     */
     public function show($id)
     {
         // Check if the article is cached
@@ -77,6 +181,35 @@ class ArticleController extends Controller
         return response()->json($article);
     }
 
+
+    /**
+     * @OA\Get(
+     *     path="/api/articles/search",
+     *     summary="Search for articles by a query string",
+     *     tags={"Articles"},
+     *     @OA\Parameter(
+     *         name="q",
+     *         in="query",
+     *         description="Search query string",
+     *         required=true,
+     *         @OA\Schema(type="string", example="latest news")
+     *     ),
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="A paginated list of search results",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="data", type="array",
+     *                 @OA\Items(ref="#/components/schemas/Article")
+     *             ),
+     *             @OA\Property(property="current_page", type="integer", example=1),
+     *             @OA\Property(property="last_page", type="integer", example=3),
+     *             @OA\Property(property="total", type="integer", example=30)
+     *         )
+     *     )
+     * )
+     */
+
     public function search(Request $request)
     {
         $query = $request->input('q');
@@ -91,5 +224,6 @@ class ArticleController extends Controller
 
         return response()->json($articles);
     }
-        
+
+
 }
