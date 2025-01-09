@@ -11,20 +11,20 @@
    ```bash
    git clone https://github.com/my1companion/news-aggregator-api.git
    cd news-aggregator-api
-    ```
+   ```
 
 Update .env for Docker
 
 Ensure your .env file is updated for Dockerized services:
 
    ```bash
-	DB_CONNECTION=mysql
-	DB_HOST=db
-	DB_PORT=3306
-	DB_DATABASE=laravel
-	DB_USERNAME=laravel
-	DB_PASSWORD=laravel
-	```
+   DB_CONNECTION=mysql
+   DB_HOST=db
+   DB_PORT=3306
+   DB_DATABASE=laravel
+   DB_USERNAME=laravel
+   DB_PASSWORD=laravel
+   ```
 
 2. Build and start the Docker containers:
 
