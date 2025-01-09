@@ -12,6 +12,20 @@
    git clone https://github.com/my1companion/news-aggregator-api.git
    cd news-aggregator-api
     ```
+
+Update .env for Docker
+
+Ensure your .env file is updated for Dockerized services:
+
+   ```bash
+	DB_CONNECTION=mysql
+	DB_HOST=db
+	DB_PORT=3306
+	DB_DATABASE=laravel
+	DB_USERNAME=laravel
+	DB_PASSWORD=laravel
+	```
+
 2. Build and start the Docker containers:
 
 	```bash
@@ -40,19 +54,19 @@ Common Commands
 
 Stop containers:
    ```bash
-	docker-compose down
-	```
+   docker-compose down
+   ```
 
 Access the application container:
  
    ```bash
-	docker exec -it laravel_app bash
- 	```
+   docker exec -it laravel_app bash
+   ```
 
 View logs:
    ```bash
-	docker-compose logs -f
- 	```
+   docker-compose logs -f
+   ```
 
 Notes
 The database is persisted in the dbdata volume.
