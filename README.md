@@ -42,10 +42,13 @@ Stop containers:
    ```bash
 	docker-compose down
  	```
+
 Access the application container:
+ 
    ```bash
 	docker exec -it laravel_app bash
  	```
+
 View logs:
    ```bash
 	docker-compose logs -f
