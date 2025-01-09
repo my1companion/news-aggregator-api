@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Article extends Model
 {
@@ -23,4 +24,21 @@ class Article extends Model
         'updated_at'
 
     ];
+    
+    protected static function booted()
+    {
+        static::saved(function ($article) {
+            // Clear the cached article
+            Cache::forget("article_{$article->id}");
+            // Clear the cached list of articles
+            Cache::forget('articles');
+        });
+
+        static::deleted(function ($article) {
+            // Clear the cached article
+            Cache::forget("article_{$article->id}");
+            // Clear the cached list of articles
+            Cache::forget('articles');
+        });
+    }
 }
