@@ -31,6 +31,11 @@
  	```
  6. Access the application at http://localhost:8000.
 
+	App: http://localhost:8000
+	API Documentation: http://localhost:8000/api/documentation
+	Remote API Documentation: https://app.swaggerhub.com/apis/MY1COMPANION/new-aggregator/1.0.0
+	
+
  Common Commands
 Stop containers:
 	```bash
