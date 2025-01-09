@@ -36,12 +36,12 @@
 	Remote API Documentation: https://app.swaggerhub.com/apis/MY1COMPANION/new-aggregator/1.0.0
 	
 
- Common Commands
+Common Commands
+
 Stop containers:
-	```bash
+   ```bash
 	docker-compose down
  	```
-
 Access the application container:
    ```bash
 	docker exec -it laravel_app bash
