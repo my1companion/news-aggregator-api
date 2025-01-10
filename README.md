@@ -1,14 +1,14 @@
-## News Aggregator
+# News Aggregator
    The News Aggregator application is designed to fetch and consolidate news articles from multiple reliable sources, providing users with a unified and streamlined news consumption experience. The application retrieves data from the following sources:
 
-# NewsAPI: 
+## NewsAPI: 
   A powerful service offering a wide range of articles from various publishers and blogs.
-# The Guardian: 
+## The Guardian: 
   A trusted source for in-depth reporting and analysis on global events, politics, and culture.
-# The New York Times (NYTimes): 
+## The New York Times (NYTimes): 
   A world-renowned publication delivering high-quality journalism on diverse topics including current affairs, business, and lifestyle.
 
-## How It Works
+# How It Works
    Fetch News: The application sends requests to the APIs of NewsAPI, The Guardian, and The New York Times to retrieve the latest articles based on user preferences (e.g., topics, categories, or keywords).
 
    Aggregate Articles: Articles from these sources are parsed and combined into a single, cohesive feed.
