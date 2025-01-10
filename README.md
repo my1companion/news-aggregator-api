@@ -1,3 +1,33 @@
+## News Aggregator
+   The News Aggregator application is designed to fetch and consolidate news articles from multiple reliable sources, providing users with a unified and streamlined news consumption experience. The application retrieves data from the following sources:
+
+# NewsAPI: 
+  A powerful service offering a wide range of articles from various publishers and blogs.
+# The Guardian: 
+  A trusted source for in-depth reporting and analysis on global events, politics, and culture.
+# The New York Times (NYTimes): 
+  A world-renowned publication delivering high-quality journalism on diverse topics including current affairs, business, and lifestyle.
+
+## How It Works
+   Fetch News: The application sends requests to the APIs of NewsAPI, The Guardian, and The New York Times to retrieve the latest articles based on user preferences (e.g., topics, categories, or keywords).
+
+   Aggregate Articles: Articles from these sources are parsed and combined into a single, cohesive feed.
+
+   Deliver Content: The aggregated news feed is presented in a user-friendly interface, ensuring users get the latest updates from multiple sources in one place.
+
+# Key Features
+  Multiple Sources: Consolidates news from three major platforms to ensure a diverse and comprehensive view of current events.
+  Customizable Feed: Fetch articles based on specific topics, keywords, or categories.
+  Real-Time Updates: Regularly syncs with APIs to provide the latest news.
+
+# API Integration
+  NewsAPI: https://newsapi.org
+  
+  The Guardian API: https://open-platform.theguardian.com/
+  
+  NYTimes API: https://developer.nytimes.com/
+
+
 # Running News Aggregator without Docker
 ## Prerequisites
 Before you begin, ensure you have the following software installed:
@@ -146,7 +176,9 @@ Signup to get API KEY on NewsAPI, Gaurdian and Nytimes
 7. Access the application at http://localhost:8000.
 
 	App: http://localhost:8000
+	
 	API Documentation: http://localhost:8000/api/documentation
+	
 	Remote API Documentation: https://app.swaggerhub.com/apis-docs/MY1COMPANION/news-aggregator_api/1.0.0
 	
 
@@ -170,7 +202,7 @@ View logs:
 
 ## Testing
 
-5. Set up test database
+1. Set up test database
 Make sure you have a MySQL or SQLite database set up, then update the .env.testing file with the correct database credentials:
    ```bash
    DB_CONNECTION=mysql
@@ -186,7 +218,7 @@ Make sure you have a MySQL or SQLite database set up, then update the .env.testi
 	php artisan migrate --env=testing
  	```
 
-2. Run Test:
+3. Run Test:
 	```bash
 	php artisan migrate
  	```
