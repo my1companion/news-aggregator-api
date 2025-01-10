@@ -1,10 +1,10 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "New Aggregator",
-        "description": "API documentation for my News-aggregator.",
+        "title": "News Aggregator API ",
+        "description": "Comprehensive API documentation with grouped paths and tags.",
         "contact": {
-            "email": "support@example.com"
+            "email": "adebowalehassan@yahoo.com"
         },
         "license": {
             "name": "Apache 2.0",
@@ -15,7 +15,7 @@
     "servers": [
         {
             "url": "{scheme}://{host}/{basePath}",
-            "description": "Dynamic server",
+            "description": "Dynamic server configuration",
             "variables": {
                 "scheme": {
                     "enum": [
@@ -31,10 +31,6 @@
                     "default": "api"
                 }
             }
-        },
-        {
-            "url": "http://localhost/api",
-            "description": "Local development server"
         },
         {
             "url": "/api"
@@ -437,6 +433,143 @@
                 ]
             }
         },
+        "/password/forgot": {
+            "post": {
+                "tags": [
+                    "Password"
+                ],
+                "summary": "Send password reset link",
+                "description": "Sends a password reset link to the user's email.",
+                "operationId": "sendResetLink",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "user@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Password reset link sent successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "We have emailed your password reset link!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failed to send password reset link",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "We couldn't find a user with that email address."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/password/reset": {
+            "post": {
+                "tags": [
+                    "Password"
+                ],
+                "summary": "Reset password",
+                "description": "Handles resetting the user's password.",
+                "operationId": "resetPassword",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "example": "token12345"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "user@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "newpassword"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "example": "newpassword"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Password reset successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Your password has been reset!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failed to reset password",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This password reset token is invalid."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/user/preferences": {
             "get": {
                 "tags": [
@@ -686,6 +819,7 @@
         "securitySchemes": {
             "bearerAuth": {
                 "type": "http",
+                "description": "Enter 'Bearer' followed by a space and your token.",
                 "bearerFormat": "JWT",
                 "scheme": "bearer"
             }
@@ -693,16 +827,20 @@
     },
     "tags": [
         {
-            "name": "Articles",
-            "description": "Articles"
+            "name": "Authentication",
+            "description": "Endpoints related to user authentication, such as login and logout."
         },
         {
-            "name": "Authentication",
-            "description": "Authentication"
+            "name": "Password",
+            "description": "Endpoints for password management, such as resetting and sending reset links."
+        },
+        {
+            "name": "Articles",
+            "description": "Endpoints for managing and retrieving news articles."
         },
         {
             "name": "User Preferences",
-            "description": "User Preferences"
+            "description": "Endpoints for managing user-specific settings and preferences."
         }
     ]
 }
