@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PasswordResetController;
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\UserPreferenceController;
+use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\Aritcle\ArticleController;
+use App\Http\Controllers\UserPreference\UserPreferenceController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
