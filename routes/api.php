@@ -20,8 +20,6 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('password/forgot', [PasswordResetController::class, 'sendResetLink']);
 Route::post('password/reset', [PasswordResetController::class, 'reset'])->name('password.reset');
 
-
-
 Route::middleware('auth:sanctum')->prefix('articles')->group(function () {
 
     // Fetch paginated articles with search functionality
@@ -32,9 +30,7 @@ Route::middleware('auth:sanctum')->prefix('articles')->group(function () {
 
     Route::get('/search', [ArticleController::class, 'search']);
     
-
 });
-
 
 Route::middleware('auth:sanctum','throttle:60,5')->group(function () {
     Route::post('/preferences', [UserPreferenceController::class, 'setPreferences']);

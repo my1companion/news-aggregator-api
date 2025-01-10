@@ -168,8 +168,26 @@ View logs:
    docker-compose logs -f
    ```
 
-Notes
-The database is persisted in the dbdata volume.
-Make sure your storage and bootstrap/cache directories are writable.
+## Testing
 
+5. Set up test database
+Make sure you have a MySQL or SQLite database set up, then update the .env.testing file with the correct database credentials:
+   ```bash
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=your_test_database_name
+   DB_USERNAME=your_database_user
+   DB_PASSWORD=your_database_password
+   ```
+
+2. Run Test Migration:
+	```bash
+	php artisan migrate --env=testing
+ 	```
+
+2. Run Test:
+	```bash
+	php artisan migrate
+ 	```
 
