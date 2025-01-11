@@ -223,3 +223,51 @@ Make sure you have a MySQL or SQLite database set up, then update the .env.testi
 	php artisan migrate
  	```
 
+# Scheduled Commands
+
+   This project includes three scheduled Artisan commands to fetch news from various sources. These commands are set to run hourly via the Laravel scheduler:
+
+   fetch:newsapi - Fetches articles from NewsAPI.
+   fetch:guardian - Fetches articles from The Guardian.
+   fetch:nytimes - Fetches articles from The New York Times.
+
+## Running the Commands Locally
+   To manually execute these commands on your local environment:
+
+   Open your terminal.
+   Navigate to the project root directory.
+   Run the desired command:
+   ```bash
+   php artisan fetch:newsapi
+   php artisan fetch:guardian
+   php artisan fetch:nytimes
+   ```
+   To test all scheduled commands as they would run in the scheduler, use:
+   ```bash
+   php artisan schedule:run
+   ```
+   This simulates the Laravel scheduler and triggers all commands due at the current time.
+
+## Running the Commands in Docker
+   If you're running the project in a Docker container, follow these steps:
+
+1. Access the Laravel container shell:   
+   ```bash
+   docker exec -it laravel_app bash
+   ```
+2. Run the desired Artisan command inside the container:
+   ```bash
+   php artisan fetch:newsapi
+   php artisan fetch:guardian
+   php artisan fetch:nytimes
+   ```
+   Alternatively, if you want to execute the commands directly without entering the container shell, use:
+   ```bash
+   docker exec -it laravel_app php artisan fetch:newsapi
+   docker exec -it laravel_app php artisan fetch:guardian
+   docker exec -it laravel_app php artisan fetch:nytimes
+   ```
+   To simulate the scheduler in Docker:
+   ```bash
+   docker exec -it laravel_app php artisan schedule:run
+   ```
