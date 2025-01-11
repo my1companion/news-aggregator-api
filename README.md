@@ -223,7 +223,7 @@ Make sure you have a MySQL or SQLite database set up, then update the .env.testi
 	php artisan migrate
  	```
 
-## Scheduled Commands
+# Scheduled Commands
 
    This project includes three scheduled Artisan commands to fetch news from various sources. These commands are set to run hourly via the Laravel scheduler:
 
